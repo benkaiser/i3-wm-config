@@ -1,0 +1,28 @@
+#!/usr/bin/python3
+import subprocess
+import sys
+import json
+import math
+from os.path import expanduser
+
+# get the name of the comic set as the background
+home = expanduser("~")
+f = open(home+"/.latest_comic")
+last_comic = f.read()
+f.close()
+
+# get the file name
+path = last_comic.split("/")[0:-2]
+last_comic = last_comic.split("/")[-1]
+last_comic = last_comic.split(".")[0]
+
+# load the json file
+jsonstring= open('/'.join(path)+'/JSON/'+last_comic+".json").read()
+jsondata = json.loads(jsonstring)
+
+if len(sys.argv) < 1:
+  print("Error not enough arguements")
+else:
+  command = sys.argv[1]
+  # handle the commands
+  print(jsondata[command])

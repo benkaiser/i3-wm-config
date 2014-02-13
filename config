@@ -182,7 +182,7 @@ bindsym XF86AudioLowerVolume exec amixer sset Master 2%-
 bindsym XF86AudioMute exec amixer sset Master toggle
 
 # startup programs
-exec /home/benkaiser/.wmii/update_background
+exec /home/benkaiser/.i3/update_background
 exec gnome-settings-daemon
 exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
 exec --no-startup-id i3-msg 'workspace 0; exec thunderbird'
@@ -193,3 +193,4 @@ exec CopyAgent
 exec udiskie
 exec xflux -l -38.14 -g 144.35
 exec xscreensaver -no-splash
+exec conky
