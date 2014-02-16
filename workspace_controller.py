@@ -42,10 +42,17 @@ def dmenu_fetch(inputstr):
 
 def open_app(workspace):
   home = expanduser("~")
-  applications = open(home+"/.cache/dmenu_run")
+  cache = home+"/.cache/dmenu_run"
+  check_new_programs(home, cache)
+  applications = open(cache)
   dmenu_run = subprocess.Popen(["dmenu","-b"], stdout=subprocess.PIPE, stdin=applications)
   output = (dmenu_run.communicate()[0]).decode().strip()
   subprocess.Popen(["i3-msg","workspace "+workspace+"; exec " + output], stdout=subprocess.PIPE)
+
+def check_new_programs(home, cachefile):
+  PATH = os.environ.get('PATH')
+  check = subprocess.Popen([home + "/.i3/dmenu_update"], stdout=subprocess.PIPE)
+  check.communicate()
 
 if len(sys.argv) < 1:
   print("Error not enough arguements")
