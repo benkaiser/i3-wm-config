@@ -180,6 +180,11 @@ client.urgent           #2f343a #900000 #ffffff #900000
 bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+
 bindsym XF86AudioLowerVolume exec amixer sset Master 2%-
 bindsym XF86AudioMute exec amixer sset Master toggle
+# other keys
+bindsym XF86Calculator exec gnome-calculator
+bindsym XF86Explorer exec google-chrome
+bindsym XF86Mail exec thunderbird -compose
+bindsym XF86HomePage exec nemo
 
 # startup programs
 exec /home/benkaiser/.i3/update_background
