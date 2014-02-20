@@ -183,12 +183,10 @@ bindsym XF86AudioMute exec amixer sset Master toggle
 
 # startup programs
 exec /home/benkaiser/.i3/update_background
-exec gnome-settings-daemon
 exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
 exec --no-startup-id i3-msg 'workspace 0; exec thunderbird'
-exec amixer sset Master 10%
+exec amixer sset Master 20%
 exec clipit
-exec nm-applet
 exec CopyAgent
 exec udiskie
 exec xflux -l -38.14 -g 144.35
