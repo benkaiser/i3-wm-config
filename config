@@ -193,7 +193,7 @@ exec --no-startup-id i3-msg 'workspace 0; exec thunderbird'
 exec amixer sset Master 20%
 exec clipit
 exec CopyAgent
-exec udiskie
+exec udiskie --tray
 exec xflux -l -38.14 -g 144.35
 exec xscreensaver -no-splash
 exec conky
