@@ -203,3 +203,6 @@ exec xscreensaver -no-splash
 exec conky
 exec amixer sset Master 20%
 #exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
+
+# open certain windows in floating mode
+for_window [class="(?i)gnome-calculator"] floating enable
