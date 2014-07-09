@@ -161,7 +161,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command py3status -c ~/.i3/i3status.conf
+        status_command i3blocks -c ~/.i3/i3blocks.conf
         tray_output primary
         colors {
                 background #000000
@@ -182,9 +182,9 @@ client.unfocused        #333333 #222222 #888888 #292d2e
 client.urgent           #2f343a #900000 #ffffff #900000
 
 # volume
-bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+
-bindsym XF86AudioLowerVolume exec amixer sset Master 2%-
-bindsym XF86AudioMute exec amixer sset Master toggle
+bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && killall -USR1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer sset Master 2%- && killall -USR1 i3blocks
+bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
 # other keys
 bindsym XF86Calculator exec gnome-calculator
 bindsym XF86Explorer exec google-chrome
@@ -198,9 +198,10 @@ exec --no-startup-id i3-msg 'workspace 0; exec thunderbird'
 exec clipit
 exec CopyAgent
 #exec udiskie --tray
-exec xflux -l -38.14 -g 144.35
+#exec xflux -l -38.14 -g 144.35
 exec xscreensaver -no-splash
 exec conky
+exec pa-applet
 exec amixer sset Master 20%
 #exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
 
