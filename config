@@ -164,24 +164,19 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command python /home/benkaiser/.i3/i3pystatusconf.py
-        colors {
-                background #000000
-                separator  #666666
-                statusline #ffffff
-
-                focused_workspace  #44bbff #3276E8 #ffffff
-                active_workspace   #333333 #5f676a #ffffff
-                inactive_workspace #333333 #222222 #888888
-                urgent_workspace   #2f343a #900000 #ffffff
-        }
+  status_command python /home/benkaiser/.i3/i3pystatusconf.py
+  colors {
+    separator #666666
+    background #222222
+    statusline #dddddd
+    focused_workspace #0088CC #0088CC #ffffff
+    active_workspace #333333 #333333 #ffffff
+    inactive_workspace #333333 #333333 #888888
+    urgent_workspace #2f343a #900000 #ffffff
+  }
 }
 
 # colors
-client.focused          #44bbff #3276E8 #ffffff #cccccc
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
 
 # volume
 bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && killall -USR1 i3blocks
@@ -209,3 +204,7 @@ exec amixer sset Master 20%
 
 # open certain windows in floating mode
 for_window [class="(?i)gnome-calculator"] floating enable
+client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #333333 #333333 #888888 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
