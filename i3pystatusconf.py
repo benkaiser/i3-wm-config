@@ -24,6 +24,17 @@ status.register("weather",
 # (the default value for format is used)
 status.register("load")
 
+# battery
+status.register("battery",
+    format="{status}/{consumption:.2f}W {percentage:.2f}% {remaining:%E%h:%M}",
+    battery_ident="BAT1",
+    alert=True,
+    alert_percentage=5,
+    status={
+        "DIS": "↓",
+        "CHR": "↑",
+        "FULL": "=",
+    },)
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",
     format="CPU TEMP {temp:.0f}°C",)
