@@ -14,7 +14,7 @@ set $control ~/.i3/workspace_controller.py
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Ubuntu, Light 10
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -120,6 +120,9 @@ bindsym $mod+Shift+0 exec $control move 0
 
 # move workspace between outputs
 bindsym $mod+y move workspace to output left
+
+# toggle border
+bindsym $mod+b exec i3-msg border toggle
 
 # reload the configuration file
 bindsym $mod+Shift+v reload
