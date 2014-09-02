@@ -6,9 +6,8 @@ status = Status(standalone=True)
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
-#                          ^-- calendar week
 status.register("clock",
-    format="%a %-d %b %X KW%V",)
+    format="%a %-d %Y %b %X",)
 
 # Displays the weather like this:
 #
@@ -50,7 +49,7 @@ status.register("network",
 #
 # Note: requires both netifaces and basiciw
 status.register("wireless",
-    interface="enp8s0",
+    interface="wlp1s0",
     format_up="{essid} {quality:03.0f}% {v4}",)
 
 # Shows disk usage of /
@@ -58,10 +57,6 @@ status.register("wireless",
 # 42/128G [86G]
 status.register("disk",
     path="/",
-    format="{avail}G",)
-
-status.register("disk",
-    path="/home/benkaiser/HD/",
     format="{avail}G",)
 
 # Shows pulseaudio default sink volume

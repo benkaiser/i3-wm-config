@@ -165,7 +165,6 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command python /home/benkaiser/.i3/i3pystatusconf.py
-        tray_output primary
         colors {
                 background #000000
                 separator  #666666
