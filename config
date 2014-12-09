@@ -14,7 +14,7 @@ set $control ~/.i3/workspace_controller.py
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:Ubuntu, Light 11
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -190,6 +190,10 @@ bindsym XF86Calculator exec gnome-calculator
 bindsym XF86Explorer exec google-chrome
 bindsym XF86Mail exec thunderbird -compose
 bindsym XF86HomePage exec nemo
+# media keys
+bindsym $mod+F6 exec curl http://localhost:2000/command/super/playpause
+bindsym $mod+F7 exec curl http://localhost:2000/command/super/prev
+bindsym $mod+F8 exec curl http://localhost:2000/command/super/next
 
 # startup programs
 exec pulseaudio --start
@@ -202,6 +206,7 @@ exec CopyAgent
 exec xscreensaver -no-splash
 exec conky
 exec pa-applet
+exec nm-applet
 exec amixer sset Master 20%
 #exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
 
