@@ -125,6 +125,20 @@ bindsym $mod+Shift+0 exec $control move 0
 # move workspace between outputs
 bindsym $mod+y move workspace to output left
 
+# move to last workspace
+
+bindsym $mod+z workspace back_and_forth
+
+# toggle border
+bindsym $mod+b exec i3-msg border toggle
+
+# boder mode
+new_window 1pixel
+
+# gaps
+#gaps inner 20
+#gaps outer 20
+
 # reload the configuration file
 bindsym $mod+Shift+v reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -161,7 +175,7 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command python /home/benkaiser/.i3/i3pystatusconf.py
+        status_command i3blocks -c /home/benkaiser/.i3/i3blocks.conf
         tray_output primary
         colors {
                 background #000000
@@ -175,15 +189,9 @@ bar {
         }
 }
 
-# colors
-client.focused          #44bbff #3276E8 #ffffff #cccccc
-client.focused_inactive #333333 #5f676a #ffffff #484e50
-client.unfocused        #333333 #222222 #888888 #292d2e
-client.urgent           #2f343a #900000 #ffffff #900000
-
 # volume
-bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && killall -USR1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer sset Master 2%- && killall -USR1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer sset Master 2%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
 # other keys
 bindsym XF86Calculator exec gnome-calculator
@@ -191,14 +199,16 @@ bindsym XF86Explorer exec google-chrome
 bindsym XF86Mail exec thunderbird -compose
 bindsym XF86HomePage exec nemo
 # media keys
-bindsym $mod+F6 exec curl http://localhost:2000/command/super/playpause
-bindsym $mod+F7 exec curl http://localhost:2000/command/super/prev
-bindsym $mod+F8 exec curl http://localhost:2000/command/super/next
+bindsym $mod+Home exec curl http://localhost:2000/command/laptop/playpause
+bindsym $mod+Next exec curl http://localhost:2000/command/laptop/prev
+bindsym $mod+Prior exec curl http://localhost:2000/command/laptop/next
+# screen layout keys
 
 # startup programs
 exec pulseaudio --start
 exec /home/benkaiser/.i3/update_background
-exec --no-startup-id i3-msg 'workspace 0; exec thunderbird'
+exec --no-startup-id i3-msg 'workspace 0; exec geary'
+exec --no-startup-id i3-msg 'workspace 0; exec keepass'
 exec clipit
 exec CopyAgent
 #exec udiskie --tray
@@ -209,6 +219,12 @@ exec pa-applet
 exec nm-applet
 exec amixer sset Master 20%
 #exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
+#exec --no-startup-id compton -b --config /home/benkaiser/.i3/compton.conf
 
 # open certain windows in floating mode
 for_window [class="(?i)gnome-calculator"] floating enable
+for_window [class="(?i)lighthouse"] floating enable
+client.focused #0088CC #0088CC #ffffff #dddddd
+client.focused_inactive #333333 #333333 #888888 #292d2e
+client.unfocused #333333 #333333 #888888 #292d2e
+client.urgent #2f343a #900000 #ffffff #900000
