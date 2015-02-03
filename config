@@ -224,6 +224,8 @@ exec amixer sset Master 20%
 # open certain windows in floating mode
 for_window [class="(?i)gnome-calculator"] floating enable
 for_window [class="(?i)lighthouse"] floating enable
+for_window [window_role="(?i)pop-up"] floating enable
+
 client.focused #0088CC #0088CC #ffffff #dddddd
 client.focused_inactive #333333 #333333 #888888 #292d2e
 client.unfocused #333333 #333333 #888888 #292d2e
