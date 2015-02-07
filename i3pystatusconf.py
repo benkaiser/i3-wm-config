@@ -6,9 +6,8 @@ status = Status(standalone=True)
 
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
-#                          ^-- calendar week
 status.register("clock",
-    format="%a %-d %b %X KW%V",)
+    format="%a %-d %b %Y %X",)
 
 # Displays the weather like this:
 #
@@ -81,14 +80,21 @@ status.register("text",
     cmd_leftclick="sleep 1; xset dpms force off",
     color="#44bbff")
 
+i3lock = "i3lock -i /home/benkaiser/Pictures/wallpapers/wide_windows_desktop.png -p win";
+
 status.register("text",
     text="Suspend System",
-    cmd_leftclick="systemctl suspend",
+    cmd_leftclick=i3lock + "; systemctl suspend",
     color="#44bbff")
 
 status.register("text",
     text="Screensaver",
     cmd_leftclick="xscreensaver-command -activate",
+    color="#44bbff")
+
+status.register("text",
+    text="lock",
+    cmd_leftclick=i3lock,
     color="#44bbff")
 
 status.run()
