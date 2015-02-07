@@ -202,6 +202,7 @@ bindsym XF86Calculator exec gnome-calculator
 bindsym XF86Explorer exec google-chrome
 bindsym XF86Mail exec thunderbird -compose
 bindsym XF86HomePage exec nemo
+bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Pictures/screenshots/'
 # media keys
 bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
 bindsym $mod+Next exec curl http://localhost:2000/command/default/prev
