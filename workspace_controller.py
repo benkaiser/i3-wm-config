@@ -11,7 +11,7 @@ def get_workspace():
   handle = subprocess.Popen(["i3-msg","-t","get_workspaces"], stdout=subprocess.PIPE)
   output = handle.communicate()[0]
   data = json.loads(output.decode())
-  data = sorted(data, key=lambda k: k['name']) 
+  data = sorted(data, key=lambda k: k['name'])
   for i in data:
     if(i['focused']):
       return i['name']
@@ -68,10 +68,16 @@ else:
   # get the workspace number
   workspace_name = get_workspace()
   workspace_val = 1 # default value if name parseing fails
+  workspace_prefix = ''
   try:
-    workspace_val = int(workspace_name)
+    match_set = '0123456789-'
+    # only look for digits in the number
+    workspace_val = int(''.join(filter(lambda x: x in match_set, workspace_name)))
+    # include - in the ignore list incase it is a negative number
+    workspace_prefix = ''.join(filter(lambda x: x not in match_set, workspace_name));
   except ValueError:
     pass
+  print(workspace_prefix)
   # handle the commands
   if command == 'up':
     workspace_val += 10
@@ -85,12 +91,12 @@ else:
     # go to workspace in block
     workspace_rounded = int(math.floor(workspace_val/10))*10
     workspace_rounded += switch_number
-    go_to(workspace_rounded)
+    go_to(workspace_prefix + str(workspace_rounded))
   elif command == 'move':
     # move the current container to the selected workspace
     workspace_rounded = int(math.floor(workspace_val/10))*10
     workspace_rounded += switch_number
-    move_to(workspace_rounded)
+    move_to(workspace_prefix + str(workspace_rounded))
   elif command == 'open':
     open_app(workspace_name)
   elif command == 'dynamic':
@@ -109,6 +115,6 @@ else:
     command2 = sys.argv[2]
     if command == 'up' or command == 'down' or command == 'prev' or command == 'next':
       if command2 == 'go':
-        go_to(workspace_val)
+        go_to(workspace_prefix + str(workspace_val))
       elif command2 == 'move':
-        move_to(workspace_val)
+        move_to(workspace_prefix + str(workspace_val))
