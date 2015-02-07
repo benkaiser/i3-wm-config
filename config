@@ -191,6 +191,10 @@ bar {
         }
 }
 
+# brightness (laptop only)
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+
 # volume
 bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer sset Master 2%- && pkill -RTMIN+1 i3blocks
@@ -209,6 +213,8 @@ bindsym $mod+Home exec curl http://localhost:2000/command/laptop/playpause
 bindsym $mod+Next exec curl http://localhost:2000/command/laptop/prev
 bindsym $mod+Prior exec curl http://localhost:2000/command/laptop/next
 # screen layout keys
+bindsym $mod+F4 exec ~/.screenlayout/work.sh
+bindsym $mod+Shift+F4 exec ~/.screenlayout/home.sh
 
 # startup programs
 exec pulseaudio --start

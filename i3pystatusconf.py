@@ -11,14 +11,14 @@ status.register("clock",
 
 # Displays the weather like this:
 #
-status.register("weather",
-    location_code="ASXX0043:1",
-    format="GEELONG {current_temp}",
-    interval=60)
-status.register("weather",
-    location_code="ASXX0075:1",
-    format="MELBOURNE {current_temp}",
-    interval=60)
+#status.register("weather",
+#    location_code="ASXX0043:1",
+#    format="GEELONG {current_temp}",
+#    interval=60)
+#status.register("weather",
+#    location_code="ASXX0075:1",
+#    format="MELBOURNE {current_temp}",
+#    interval=60)
 
 # Shows the average load of the last minute and the last 5 minutes
 # (the default value for format is used)
@@ -37,12 +37,12 @@ status.register("battery",
     },)
 # Shows your CPU temperature, if you have a Intel CPU
 status.register("temp",
-    format="CPU TEMP {temp:.0f}°C",)
+    format="CPU {temp:.0f}°C",)
 
 # Displays whether a DHCP client is running
-status.register("runwatch",
-    name="DHCP",
-    path="/var/run/dhclient*.pid",)
+#status.register("runwatch",
+#    name="DHCP",
+#    path="/var/run/dhclient*.pid",)
 
 # Shows the address and up/down state of eth0. If it is up the address is shown in
 # green (the default value of color_up) and the CIDR-address is shown
@@ -51,9 +51,9 @@ status.register("runwatch",
 # (defaults of format_down and color_down)
 #
 # Note: the network module requires PyPI package netifaces
-status.register("network",
-    interface="eno1",
-    format_up="{v4cidr}",)
+#status.register("network",
+#    interface="eno1",
+#    format_up="{v4cidr}",)
 
 # Has all the options of the normal network and adds some wireless specific things
 # like quality and network names.
@@ -68,7 +68,7 @@ status.register("wireless",
 # 42/128G [86G]
 status.register("disk",
     path="/",
-    format="{avail}G",)
+    format="{avail}G")
 
 # Shows pulseaudio default sink volume
 #
@@ -89,12 +89,19 @@ status.register("text",
 
 status.register("text",
     text="Suspend System",
-    cmd_leftclick="systemctl suspend",
+#    cmd_leftclick="i3lock -p win -i /home/benkaiser/Pictures/windows.png & systemctl suspend",
+    cmd_leftclick="benlock & systemctl suspend",
     color="#44bbff")
 
 status.register("text",
     text="Screensaver",
     cmd_leftclick="xscreensaver-command -activate",
+    color="#44bbff")
+
+status.register("text",
+    text="lock",
+#    cmd_leftclick="i3lock -p win -i /home/benkaiser/Pictures/windows.png",
+    cmd_leftclick="benlock",
     color="#44bbff")
 
 status.run()
