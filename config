@@ -190,8 +190,8 @@ bar {
 }
 
 # volume
-bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer sset Master 2%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
 # other keys
 bindsym XF86Calculator exec gnome-calculator
@@ -199,13 +199,13 @@ bindsym XF86Explorer exec google-chrome
 bindsym XF86Mail exec thunderbird -compose
 bindsym XF86HomePage exec nemo
 # media keys
-bindsym $mod+Home exec curl http://localhost:2000/command/laptop/playpause
-bindsym $mod+Next exec curl http://localhost:2000/command/laptop/prev
-bindsym $mod+Prior exec curl http://localhost:2000/command/laptop/next
+bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
+bindsym $mod+Next exec curl http://localhost:2000/command/default/prev
+bindsym $mod+Prior exec curl http://localhost:2000/command/default/next
 # screen layout keys
 
 # startup programs
-exec pulseaudio --start
+# exec pulseaudio --start
 exec /home/benkaiser/.i3/update_background
 exec --no-startup-id i3-msg 'workspace 0; exec geary'
 exec --no-startup-id i3-msg 'workspace 0; exec keepass'
