@@ -125,9 +125,6 @@ bindsym $mod+Shift+0 exec $control move 0
 # move workspace between outputs
 bindsym $mod+y move workspace to output left
 
-# toggle border
-bindsym $mod+b exec i3-msg border toggle
-
 # move to last workspace
 bindsym $mod+z workspace back_and_forth
 
@@ -190,10 +187,6 @@ bar {
                 urgent_workspace   #2f343a #900000 #ffffff
         }
 }
-
-# brightness (laptop only)
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # volume
 bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && pkill -RTMIN+1 i3blocks
