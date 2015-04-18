@@ -128,6 +128,10 @@ bindsym $mod+y move workspace to output left
 # move to last workspace
 bindsym $mod+z workspace back_and_forth
 
+# lock computer
+bindsym $mod+Control+Shift+l exec benlock
+bindsym $mod+Control+Shift+s exec benlock && systemctl suspend
+
 # toggle border
 bindsym $mod+b exec i3-msg border toggle
 
@@ -212,7 +216,7 @@ bindsym $mod+Shift+F4 exec ~/.screenlayout/home.sh
 # startup programs
 exec pulseaudio --start
 exec /home/benkaiser/.i3/update_background
-exec --no-startup-id i3-msg 'workspace 0; exec geary'
+# exec --no-startup-id i3-msg 'workspace 0; exec geary'
 exec --no-startup-id i3-msg 'workspace 0; exec keepass'
 exec clipit
 exec CopyAgent
