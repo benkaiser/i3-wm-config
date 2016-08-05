@@ -11,6 +11,21 @@
 
 set $mod Mod1
 set $control ~/.i3/workspace_controller.py
+set $rofi "rofi -show run -font 'snap 10' -color-normal '#000000,#ffffff,#222222,#44bbff,#ffffff' -color-window '#000000,#ffffff'"
+
+
+# Hybrid colors
+set $black	#002B36
+set $white	#839496
+set $gray	#CCCCCC
+set $darkgray	#666666
+set $green 	#799F26
+set $blue	#4D73AA
+set $purple	#8473A7
+set $red	#B58900
+set $orange	#E59847
+set $cyan	#2AA198
+set $dark	#00252E
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -31,7 +46,7 @@ bindsym $mod+Return exec terminator
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+p exec $control open
+bindsym $mod+p exec $rofi
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -130,14 +145,17 @@ bindsym $mod+y move workspace to output left
 bindsym $mod+z workspace back_and_forth
 
 # lock computer
-bindsym $mod+Control+Shift+l exec i3lock
-bindsym $mod+Control+Shift+s exec i3lock && systemctl suspend
+bindsym --release $mod+Control+Shift+l exec i3lock
+bindsym --release $mod+Control+Shift+s exec i3lock && systemctl suspend
 
 # toggle border
 bindsym $mod+b exec i3-msg border toggle
 
 # boder mode
 new_window 1pixel
+
+# new workspace layout mode
+workspace_layout default
 
 # gaps
 #gaps inner 20
@@ -180,16 +198,17 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks -c /home/benkaiser/.i3/i3blocks.conf
+        position bottom
         tray_output primary
         colors {
-                background #000000
-                separator  #666666
-                statusline #ffffff
+                statusline	#999999
+                background	$black
 
-                focused_workspace  #44bbff #3276E8 #ffffff
-                active_workspace   #333333 #5f676a #ffffff
-                inactive_workspace #333333 #222222 #888888
-                urgent_workspace   #2f343a #900000 #ffffff
+                # Colors            border      backgr.     text
+                focused_workspace	$white	 	$white		$black
+                active_workspace	#073642 	#073642 	#696f89
+                inactive_workspace	#073642 	#073642     $white
+                urgent_workspace  	$orange		$orange		$dark
         }
 }
 
@@ -204,7 +223,7 @@ bindsym XF86AudioMute exec amixer sset Master toggle && killall -USR1 i3blocks
 # other keys
 bindsym XF86Calculator exec gnome-calculator
 bindsym XF86Explorer exec google-chrome
-bindsym XF86Mail exec thunderbird -compose
+#bindsym XF86Mail exec thunderbird -compose
 bindsym XF86HomePage exec nemo
 bindsym Print exec scrot '%Y-%m-%d_%T_scrot.png' -e 'mv $f ~/Pictures/screenshots/'
 # media keys
@@ -223,9 +242,10 @@ exec CopyAgent
 #exec udiskie --tray
 #exec xflux -l -38.14 -g 144.35
 exec xscreensaver -no-splash
-exec conky
+#exec conky
 exec pa-applet
 exec nm-applet
+exec megasync
 exec amixer sset Master 20%
 #exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
 #exec --no-startup-id compton -b --config /home/benkaiser/.i3/compton.conf
@@ -235,7 +255,8 @@ for_window [class="(?i)gnome-calculator"] floating enable
 for_window [class="(?i)lighthouse"] floating enable
 for_window [window_role="(?i)pop-up"] floating enable
 
-client.focused #0088CC #0088CC #ffffff #dddddd
-client.focused_inactive #333333 #333333 #888888 #292d2e
-client.unfocused #333333 #333333 #888888 #292d2e
-client.urgent #2f343a #900000 #ffffff #900000
+#class                  border  backgr. text    indicator
+client.focused			$white  $white  $dark    $dark
+client.unfocused		$dark   $dark   $white   $white
+client.focused_inactive	$dark   $dark   $white   $dark
+client.urgent			$orange $orange $dark    $white
