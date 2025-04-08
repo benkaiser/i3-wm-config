@@ -8,7 +8,7 @@ from os.path import expanduser
 from tempfile import TemporaryFile
 
 def get_workspace():
-  handle = subprocess.Popen(["i3-msg","-t","get_workspaces"], stdout=subprocess.PIPE)
+  handle = subprocess.Popen(["swaymsg","-t","get_workspaces"], stdout=subprocess.PIPE)
   output = handle.communicate()[0]
   data = json.loads(output.decode())
   data = sorted(data, key=lambda k: k['name'])
@@ -17,7 +17,7 @@ def get_workspace():
       return i['name']
 
 def get_workspaces():
-  handle = subprocess.Popen(["i3-msg","-t","get_workspaces"], stdout=subprocess.PIPE)
+  handle = subprocess.Popen(["swaymsg","-t","get_workspaces"], stdout=subprocess.PIPE)
   output = handle.communicate()[0]
   data = json.loads(output.decode())
   data = sorted(data, key=lambda k: k['name'])
@@ -27,32 +27,18 @@ def get_workspaces():
   return arr
 
 def move_to(num):
-  subprocess.Popen(["i3-msg","move container to workspace "+str(num)], stdout=subprocess.PIPE)
+  subprocess.Popen(["swaymsg","move container to workspace "+str(num)], stdout=subprocess.PIPE)
 
 def go_to(num):
-  subprocess.Popen(["i3-msg","workspace "+str(num)], stdout=subprocess.PIPE)
+  subprocess.Popen(["swaymsg","workspace "+str(num)], stdout=subprocess.PIPE)
 
 def dmenu_fetch(inputstr):
   t = TemporaryFile()
   t.write(bytes(inputstr, 'UTF-8'))
   t.seek(0)
-  dmenu_run = subprocess.Popen(["dmenu","-b"], stdout=subprocess.PIPE, stdin=t)
+  dmenu_run = subprocess.Popen(["fuzzel", "-l", "0", "-d", "--prompt", "Which workspace? "], stdout=subprocess.PIPE, stdin=t)
   output = (dmenu_run.communicate()[0]).decode().strip()
   return output
-
-def open_app(workspace):
-  home = expanduser("~")
-  cache = home+"/.cache/dmenu_run"
-  check_new_programs(home, cache)
-  applications = open(cache)
-  dmenu_run = subprocess.Popen(["dmenu","-b"], stdout=subprocess.PIPE, stdin=applications)
-  output = (dmenu_run.communicate()[0]).decode().strip()
-  subprocess.Popen(["i3-msg","workspace "+workspace+"; exec " + output], stdout=subprocess.PIPE)
-
-def check_new_programs(home, cachefile):
-  PATH = os.environ.get('PATH')
-  check = subprocess.Popen([home + "/.i3/dmenu_update"], stdout=subprocess.PIPE)
-  check.communicate()
 
 if len(sys.argv) < 1:
   print("Error not enough arguements")
@@ -97,8 +83,6 @@ else:
     workspace_rounded = int(math.floor(workspace_val/10))*10
     workspace_rounded += switch_number
     move_to(workspace_prefix + str(workspace_rounded))
-  elif command == 'open':
-    open_app(workspace_name)
   elif command == 'dynamic':
     # dynamic tagging
     command2 = sys.argv[2]

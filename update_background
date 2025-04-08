@@ -1,5 +1,8 @@
 #!/usr/bin/bash
-files=(~/GIT/unsplash-downloader/photos/*)
+sleep 1
+files=(~/Pictures/wallpapers/*)
 WALLPAPER=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
 WALLPAPER2=$(printf "%s\n" "${files[RANDOM % ${#files[@]}]}")
-feh -B white --bg-fill $WALLPAPER --bg-fill $WALLPAPER2
+SWAYSOCK=$(ls /run/user/1000/sway-ipc.* | head -n 1)
+swaymsg -s $SWAYSOCK output DP-1 bg $WALLPAPER  fill
+swaymsg -s $SWAYSOCK output DP-2 bg $WALLPAPER2  fill
