@@ -259,8 +259,6 @@ bar {
 # volume
 bindsym XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
 bindsym XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-bindsym $mod+period exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+
-bindsym $mod+comma exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
 #
 # granular volume control
 bindsym $mod+XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+
@@ -281,6 +279,7 @@ bindsym $mod+Home exec curl http://localhost:2000/command/default/playpause
 bindsym $mod+Next exec curl http://localhost:2000/command/default/prev
 bindsym $mod+Prior exec curl http://localhost:2000/command/default/next
 bindsym --release $mod+Shift+s exec 'grim -g "$(slurp)" - | wl-copy'
+bindsym Mod4+period exec 'BEMOJI_PICKER_CMD="fuzzel -d" bemoji -n'
 
 
 # screen layout keys
